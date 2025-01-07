@@ -1,9 +1,10 @@
+import FeaturedProducts from '@/Custom-Components/FeaturedProducts';
 import React from 'react'
 
 const Home = () => {
   return (
     <div>
-      home
+      <FeaturedProducts />
     </div>
   )
 }

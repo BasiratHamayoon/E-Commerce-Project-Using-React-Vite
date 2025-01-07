@@ -54,17 +54,20 @@ const Navbar = () => {
 
                 {/* Menu Items for Large Screens */}
                 <div className='hidden lg:flex items-center space-x-6'>
-                    {navItems.map((items) => (
-                        <Link
-                            key={items.id}
-                            to={items.url}
-                            className='text-gray-700  hover:text-gray-900 flex items-center space-x-2'
-                        >
-                            <span>{items.icon}</span>
-                            <span className='hover:border-b h-[20px]'>{items.title}</span>
+                     {navItems.map((items) => (
+                         <Link
+                         key={items.id}
+                         to={items.url}
+                         className='text-gray-700 hover:text-gray-900 flex items-center space-x-2'
+                         >
+                        <span>{items.icon}</span>
+                        <span className='border-b-2 border-transparent hover:border-gray-700 transition-all duration-300 ease-in-out'>
+                        {items.title}
+                        </span>
                         </Link>
-                    ))}
-                </div>
+                     ))}
+              </div>
+
 
                 {/* Right Section */}
                 <div className='flex items-center gap-4'>
