@@ -4,8 +4,8 @@ import Navbar from './Custom-Components/Navbar'
 import Products from './Pages/Products'
 import Signin from './Pages/Signin'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home'
 import Contact from './Pages/Contact'
+import Home from './Pages/Home'
 
 function App() {
   const [count, setCount] = useState(0)

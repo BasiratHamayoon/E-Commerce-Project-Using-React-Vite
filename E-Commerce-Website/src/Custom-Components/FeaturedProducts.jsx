@@ -42,6 +42,7 @@ const FeaturedProducts = () => {
 
     return (
         <div>
+
             <div className='flex flex-col justify-center items-center'>
                 <h1 className='font-sans py-[100px] text-[30px] font-bold text-purple-950'>Featured Products</h1>
 
