@@ -65,11 +65,11 @@ const LeatestProducts = () => {
                 <h1 className='font-sans py-[50px] text-[30px] font-bold text-purple-950'>Leatest Products</h1>
                 
                 {/* Dynamic Menu */}
-                <div className='flex justify-center gap-8 pb-6'>
+                <div className='flex justify-center items-center gap-5 pb-6'>
                     {categories.map((category, index) => (
                         <div
                             key={index}
-                            className={`px-3 py-2 text-sm font-semibold ${
+                            className={`px-3 py-2 sm:text-[14px] text-[10px] font-semibold ${
                                 activeCategory === category ? 'text-[#fb4997] border-b-2 border-[#fb4997]' : 'text-[#151855]'
                             } transition-all hover:border-b-2 border-[#fb4997] hover:text-[#fb4997]`}
                             onClick={() => setActiveCategory(category)}
