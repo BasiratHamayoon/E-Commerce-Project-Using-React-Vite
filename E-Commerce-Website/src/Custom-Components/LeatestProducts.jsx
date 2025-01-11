@@ -10,6 +10,7 @@ import { CiHeart } from "react-icons/ci";
 import { LiaSearchPlusSolid } from "react-icons/lia";
 
 const LeatestProducts = () => {
+
     const [activeCategory, setActiveCategory] = useState('New Arrivals');
 
     const categories = ['New Arrivals', 'Best Sellers', 'Featured', 'Special Offers'];
@@ -64,7 +65,7 @@ const LeatestProducts = () => {
             <div className='flex flex-col justify-center items-center w-[100%]'>
                 <h1 className='font-sans py-[50px] text-[30px] font-bold text-purple-950'>Leatest Products</h1>
                 
-                {/* Dynamic Menu */}
+                {/* Leatest Products Menu */}
                 <div className='flex justify-center items-center gap-5 pb-6'>
                     {categories.map((category, index) => (
                         <div
@@ -78,8 +79,6 @@ const LeatestProducts = () => {
                         </div>
                     ))}
                 </div>
-
-                {/* Conditional Rendering */}
                 {activeCategory === 'New Arrivals' ? (
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-[80%] mx-auto justify-center items-center m-[10px]'>
                         {leatestProductsItems.map((item, index) => (

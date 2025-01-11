@@ -12,11 +12,11 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    // Toggle Menu
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
+    // Define main navigation items for both desktop and mobile
     const navItems = [
         {
             id: 1,
@@ -37,7 +37,7 @@ const Navbar = () => {
             icon: <IoMdContact />
         },
         {
-            id: 5,
+            id: 6,
             title: "Signin",
             url: "/Signin",
             icon: <BsFillSignIntersectionFill />
@@ -47,31 +47,30 @@ const Navbar = () => {
     return (
         <div>
             <div className='w-full py-[25px] flex justify-between lg:px-[80px] px-[20px] border border-b shadow-sm'>
-                {/* Logo */}
                 <div>
-                    <h1 className='lg:text-[30px] text-[20px] font-bold font-sans'>OnlineShop</h1>
+                    <h1 className='lg:text-[30px] text-[20px] font-semibold text-black font-sans'>OnlineShop</h1>
                 </div>
 
-                {/* Menu Items for Large Screens */}
+                {/* Desktop Navigation */}
                 <div className='hidden lg:flex items-center space-x-6'>
-                     {navItems.map((items) => (
-                         <Link
-                         key={items.id}
-                         to={items.url}
-                         className='text-gray-700 hover:text-gray-900 flex items-center space-x-2'
-                         >
-                        <span>{items.icon}</span>
-                        <span className='border-b-2 border-transparent hover:border-gray-700 transition-all duration-300 ease-in-out'>
-                        {items.title}
-                        </span>
+                    {navItems.map((items) => (
+                        <Link
+                            key={items.id}
+                            to={items.url}
+                            className='text-gray-700 flex items-center space-x-2 hover:text-black'
+                        >
+                            <span>{items.icon}</span>
+                            <span
+                                className='border-b-2 border-transparent transition-all duration-300 ease-in-out hover:border-black'
+                            >
+                                {items.title}
+                            </span>
                         </Link>
-                     ))}
-              </div>
+                    ))}
+                </div>
 
-
-                {/* Right Section */}
                 <div className='flex items-center gap-4'>
-                    {/* Search for Large Screens */}
+                    {/* Search Bar */}
                     <div className='hidden lg:flex items-center border rounded-sm'>
                         <input
                             type="text"
@@ -83,25 +82,29 @@ const Navbar = () => {
                         <CiSearch size={25} />
                     </div>
 
-                    {/* Icons */}
-                    <CiHeart size={25} />
-                    <PiShoppingCartLight size={25} />
+                    {/* Favorites and Cart Icons */}
+                    <Link to="/Favorites" className='hover:text-black'>
+                        <CiHeart size={25} />
+                    </Link>
+                    <Link to="/Cart" className='hover:text-black'>
+                        <PiShoppingCartLight size={25} />
+                    </Link>
 
-                    {/* Burger Menu for Small and Medium Screens */}
+                    {/* Mobile Menu Toggle */}
                     <div className='lg:hidden'>
-                        <CiMenuBurger size={25} onClick={toggleMenu} />
+                        <CiMenuBurger size={22} onClick={toggleMenu} />
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Navigation */}
             <div
                 className={`lg:hidden fixed top-0 left-0 w-[250px] h-full bg-white transition-all duration-300 ease-in-out transform ${
                     isOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}
             >
                 <ul className='flex flex-col px-[20px] pt-[20px]'>
-                    {/* Search for Mobile Menu */}
+                    {/* Search Bar */}
                     <label htmlFor="search">
                         <div className='flex border rounded-sm items-center w-full'>
                             <input
@@ -114,8 +117,10 @@ const Navbar = () => {
                             <CiSearch size={25} />
                         </div>
                     </label>
+
+                    {/* Render Main Navigation Items */}
                     {navItems.map((items) => (
-                        <li key={items.id} className='flex my-[16px] gap-2 px-[10px]'>
+                        <li key={items.id} className='flex my-[16px] gap-2 px-[10px] hover:text-black'>
                             <span>{items.icon}</span>
                             <Link to={items.url}>{items.title}</Link>
                         </li>
