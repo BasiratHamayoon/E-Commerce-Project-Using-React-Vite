@@ -1,4 +1,3 @@
-// src/Custom-Components/Home.jsx
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchProducts } from '@/Slices/ProductSlice';
