@@ -14,7 +14,10 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const { favoriteProducts } = useSelector((state) => state?.favorite);
-    console.log(favoriteProducts)
+    console.log(favoriteProducts);
+
+    const { cartProducts } = useSelector((state) => state?.cart);
+    console.log(cartProducts);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -99,7 +102,14 @@ const Navbar = () => {
                     </Link>
 
                     <Link to="/Cart" className='hover:text-black'>
+                       <div className='relative'>
+
+                            <span className='absolute top-[-6px] right-[-4px] bg-pink-600 text-white text-xs w-[16px] h-[16px] flex justify-center items-center rounded-full z-10'>
+                                {cartProducts.length}
+                            </span>
+
                         <PiShoppingCartLight size={25} />
+                        </div>
                     </Link>
 
                     {/* Mobile Menu Toggle */}
