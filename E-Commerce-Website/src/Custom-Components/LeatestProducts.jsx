@@ -1,11 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import spinner from '../assets/icons/loader.gif';
 import { CiShoppingCart } from 'react-icons/ci';
 import { CiHeart } from 'react-icons/ci';
 import { LiaSearchPlusSolid } from 'react-icons/lia';
+import { toggleFavorite } from '@/Slices/FavoriteSlice';
 
 const LatestProducts = () => {
+    const disatch = useDispatch();
+
+    const handleFavorite = (data) => {
+        disatch(toggleFavorite(data));
+    }
+
     const { isLoading, products, message } = useSelector((state) => state.product);
 
     return (
@@ -38,7 +45,7 @@ const LatestProducts = () => {
                                 </div>
                                 <div className="text-blue-700 absolute flex flex-col mt-[100px] px-[10px] gap-2 transition-opacity duration-300 hover:text-blue-950 opacity-0 group-hover:opacity-100">
                                     <CiShoppingCart />
-                                    <CiHeart />
+                                    <CiHeart onClick={() => handleFavorite(item)} />
                                     <LiaSearchPlusSolid />
                                 </div>
                                 <div className="flex justify-between mt-2 gap-2">

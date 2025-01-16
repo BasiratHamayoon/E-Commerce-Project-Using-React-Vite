@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import productReducer from './Slices/ProductSlice';  // Import productReducer
+import { configureStore } from "@reduxjs/toolkit";
+import productReducer from "./Slices/ProductSlice"; 
+import favoriteReducer from "./Slices/FavoriteSlice"; 
 
-// Create the store with productSlice reducer
 const store = configureStore({
   reducer: {
-    product: productReducer,  // Add the product slice to the Redux store
+    product: productReducer,
+    favorite: favoriteReducer, // Use the correct reducer name
   },
 });
 

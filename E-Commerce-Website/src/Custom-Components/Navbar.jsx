@@ -8,9 +8,13 @@ import { CiHeart } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import { CiMenuBurger } from "react-icons/ci";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const { favoriteProducts } = useSelector((state) => state?.favorite);
+    console.log(favoriteProducts)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -82,10 +86,18 @@ const Navbar = () => {
                         <CiSearch size={25} />
                     </div>
 
-                    {/* Favorites and Cart Icons */}
-                    <Link to="/Favorites" className='hover:text-black'>
-                        <CiHeart size={25} />
+                    <Link to="/Favorites" className="relative hover:text-black">
+                        <div className="relative">
+                            {/* Only show the badge if there are favorite products */}
+                            {favoriteProducts?.length > 0 && (
+                                <span className="absolute top-[-6px] right-[-4px] bg-pink-600 text-white text-xs w-[16px] h-[16px] flex justify-center items-center rounded-full z-10">
+                                    {favoriteProducts.length}
+                                </span>
+                            )}
+                            <CiHeart size={25} />
+                        </div>
                     </Link>
+
                     <Link to="/Cart" className='hover:text-black'>
                         <PiShoppingCartLight size={25} />
                     </Link>
