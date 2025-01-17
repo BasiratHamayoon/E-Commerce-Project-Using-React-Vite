@@ -7,48 +7,26 @@ import { PiShoppingCartLight } from "react-icons/pi";
 import { CiHeart } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import { CiMenuBurger } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation(); // Get the current location
 
     const { favoriteProducts } = useSelector((state) => state?.favorite);
-    console.log(favoriteProducts);
-
     const { cartProducts } = useSelector((state) => state?.cart);
-    console.log(cartProducts);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-    // Define main navigation items for both desktop and mobile
+    // Define main navigation items
     const navItems = [
-        {
-            id: 1,
-            title: "Home",
-            url: "/",
-            icon: <IoMdHome />
-        },
-        {
-            id: 2,
-            title: "Products",
-            url: "/Products",
-            icon: <AiFillProduct />
-        },
-        {
-            id: 3,
-            title: "Contact",
-            url: "/Contact",
-            icon: <IoMdContact />
-        },
-        {
-            id: 6,
-            title: "Signin",
-            url: "/Signin",
-            icon: <BsFillSignIntersectionFill />
-        },
+        { id: 1, title: "Home", url: "/", icon: <IoMdHome /> },
+        { id: 2, title: "Products", url: "/Products", icon: <AiFillProduct /> },
+        { id: 3, title: "Contact", url: "/Contact", icon: <IoMdContact /> },
+        { id: 6, title: "Signin", url: "/Signin", icon: <BsFillSignIntersectionFill /> },
     ];
 
     return (
@@ -60,17 +38,21 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <div className='hidden lg:flex items-center space-x-6'>
-                    {navItems.map((items) => (
+                    {navItems.map((item) => (
                         <Link
-                            key={items.id}
-                            to={items.url}
-                            className='text-gray-700 flex items-center space-x-2 hover:text-black'
+                            key={item.id}
+                            to={item.url}
+                            className={`flex items-center space-x-2 ${
+                                location.pathname === item.url ? 'text-black font-bold' : 'text-gray-700'
+                            } hover:text-black transition-all duration-300 ease-in-out`}
                         >
-                            <span>{items.icon}</span>
+                            <span>{item.icon}</span>
                             <span
-                                className='border-b-2 border-transparent transition-all duration-300 ease-in-out hover:border-black'
+                                className={`border-b-2 ${
+                                    location.pathname === item.url ? 'border-black' : 'border-transparent'
+                                } transition-all duration-300`}
                             >
-                                {items.title}
+                                {item.title}
                             </span>
                         </Link>
                     ))}
@@ -91,7 +73,6 @@ const Navbar = () => {
 
                     <Link to="/Favorites" className="relative hover:text-black">
                         <div className="relative">
-                            {/* Only show the badge if there are favorite products */}
                             {favoriteProducts?.length > 0 && (
                                 <span className="absolute top-[-6px] right-[-4px] bg-pink-600 text-white text-xs w-[16px] h-[16px] flex justify-center items-center rounded-full z-10">
                                     {favoriteProducts.length}
@@ -102,13 +83,11 @@ const Navbar = () => {
                     </Link>
 
                     <Link to="/Cart" className='hover:text-black'>
-                       <div className='relative'>
-
+                        <div className='relative'>
                             <span className='absolute top-[-6px] right-[-4px] bg-pink-600 text-white text-xs w-[16px] h-[16px] flex justify-center items-center rounded-full z-10'>
                                 {cartProducts.length}
                             </span>
-
-                        <PiShoppingCartLight size={25} />
+                            <PiShoppingCartLight size={25} />
                         </div>
                     </Link>
 
@@ -121,12 +100,11 @@ const Navbar = () => {
 
             {/* Mobile Navigation */}
             <div
-                className={`lg:hidden fixed top-0 left-0 w-[250px] h-full bg-white transition-all duration-300 ease-in-out transform ${
+                className={`lg:hidden fixed top-0 left-0 w-[250px] h-full bg-white transition-all duration-300 transform ${
                     isOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}
             >
                 <ul className='flex flex-col px-[20px] pt-[20px]'>
-                    {/* Search Bar */}
                     <label htmlFor="search">
                         <div className='flex border rounded-sm items-center w-full'>
                             <input
@@ -139,12 +117,17 @@ const Navbar = () => {
                             <CiSearch size={25} />
                         </div>
                     </label>
-
-                    {/* Render Main Navigation Items */}
-                    {navItems.map((items) => (
-                        <li key={items.id} className='flex my-[16px] gap-2 px-[10px] hover:text-black'>
-                            <span>{items.icon}</span>
-                            <Link to={items.url}>{items.title}</Link>
+                    {navItems.map((item) => (
+                        <li key={item.id} className='my-[16px] px-[10px]'>
+                            <Link
+                                to={item.url}
+                                className={`flex items-center gap-2 ${
+                                    location.pathname === item.url ? 'text-black font-bold' : 'text-gray-700'
+                                } hover:text-black transition-all duration-300 ease-in-out`}
+                            >
+                                <span>{item.icon}</span>
+                                <span>{item.title}</span>
+                            </Link>
                         </li>
                     ))}
                 </ul>
